@@ -131,7 +131,7 @@ export default function Admin() {
   if (!auth) {
     return (
       <div
-        className="min-h-screen flex items-center justify-center bg-gradient-to-r from-red-100 via-red-50 to-white p-6"
+        className="min-h-screen flex items-center justify-center bg-linear-to-r from-red-100 via-red-50 to-white p-6"
         dir="rtl"
       >
         <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-sm flex flex-col items-center">

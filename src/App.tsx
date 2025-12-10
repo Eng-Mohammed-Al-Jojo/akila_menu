@@ -50,40 +50,35 @@ export default function App() {
   }, []);
 
   return (
+    
     <div
       className="min-h-screen flex flex-col font-sans"
       dir="rtl"
       style={{
-        background: "linear-gradient(to bottom, #f9f7ff, #f0fff6)", // خلفية pastel هادئة
+        background: "linear-gradient(to bottom, #f9f7ff, #f0fff6)",
       }}
     >
-      {/* رأس الصفحة */}
-      <header
-        className="text-white text-center p-6 rounded-b-3xl shadow-md"
-        style={{
-          background: "linear-gradient(to right, #a78bfa, #6ee7b7)", // تدرج هادئ موف-أخضر
-        }}
-      >
-        <h1
-          className="text-4xl font-bold"
-          style={{ fontFamily: "Tajawal, sans-serif" }}
-        >
-          عكيلة للبراد والبوظة
-        </h1>
-      </header>
-  {/* اللوجو */}
-  <div className="flex justify-center mb-8">
-    <img
-      src="/logo.png"
-      alt="Logo"
-      className="w-max h-auto object-contain "
-    />
-  </div>
-      {/* محتوى الصفحة */}
-      <main className="flex-1 max-w-3xl mx-auto space-y-10 w-full px-6 py-10">
+      {/* اللوجو في أعلى الصفحة */}
+      <div className="w-full flex justify-center mt-8 mb-4">
+        <img
+          src="/logo_akila.png"
+          alt="Logo"
+          className="w-72 h-auto object-contain"
+        />
+      </div>
+
+      {/* المحتوى */}
+      <main className="flex-1 max-w-3xl mx-auto space-y-10 w-full px-6 py-6">
         {menu.map((section) => (
           <div key={section.category}>
-            <h2 className="text-2xl font-semibold text-purple-700 mb-4 border-b-2 border-green-200 pb-2">
+            <h2
+              className="text-2xl font-bold mb-4 border-b-2 pb-2"
+              style={{
+                color: "#B22271", // لون مطابق للوجو
+                borderColor: "#5C3A0F",
+                fontFamily: "Tajawal, sans-serif",
+              }}
+            >
               {section.category}
             </h2>
 
@@ -91,10 +86,13 @@ export default function App() {
               {section.items.map((item) => (
                 <div
                   key={item.id}
-                  className="p-5 rounded-2xl shadow-md bg-white flex justify-between items-center text-gray-900 transition-all duration-200 hover:shadow-lg"
+                  className="p-5 rounded-2xl shadow-md bg-white flex justify-between items-center 
+                  text-gray-900 transition-all duration-200 hover:shadow-lg"
                 >
                   <h3 className="text-lg font-medium">{item.name}</h3>
-                  <div className="text-lg font-semibold">{item.price} ₪</div>
+                  <div className="text-lg font-semibold text-[#CCC20D]">
+                    {item.price} ₪
+                  </div>
                 </div>
               ))}
             </div>
@@ -102,15 +100,32 @@ export default function App() {
         ))}
       </main>
 
-      {/* تذييل الصفحة */}
-      <footer
-        className="text-gray-700 text-center py-5 rounded-t-3xl text-sm"
-        style={{
-          background: "#e0f7f1", // خلفية هادئة
-        }}
-      >
-        © 2025 عكيلة للبراد والبوظة — تطوير: Eng. Mohammed Eljoujo
-      </footer>
+      {/* الفوتر */}
+<footer
+  className="text-gray-700 py-5 rounded-t-3xl text-sm font-bold"
+  style={{
+    background: "linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(204, 194, 13, 0.5))"
+  }}
+>
+  <div className="container mx-auto flex justify-between items-center px-5">
+    {/* بيانات المطور على اليسار */}
+   
+
+    {/* بيانات المحل على اليمين */}
+    <div className="text-left">
+      © 2025 بوظة وبراد عكيلة  <br />
+       للتواصل: 0592270295
+    </div>
+
+     <div className="text-right">
+      تطوير: Eng. Mohammed Eljoujo <br />
+      للتواصل: 0592133357
+    </div>
+  </div>
+</footer>
+
+
+
     </div>
   );
 }
