@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import AdminPage from "./Admin";
-import Menu from "./Menu";
 
 import "./index.css";
 
@@ -18,8 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         {/* صفحة الأدمن */}
         <Route path="/admin" element={<AdminPage />} />
        
-           {/* صفحة menu Test */}
-        <Route path="/menu" element={<Menu />} />
+       
         
       </Routes>
     </BrowserRouter>
