@@ -89,9 +89,9 @@ export default function App() {
                 <div
                   key={item.id}
                   className={`p-5 rounded-2xl shadow-md flex justify-between items-center 
-                    transition-all duration-200 hover:shadow-lg hover:shadow-[#e56fb0]  ${
+                     ${
                       !item.visible
-                        ? "bg-white-100 text-gray-900"
+                        ? "bg-white-100 text-gray-900 transition-all duration-200 hover:shadow-lg hover:shadow-[#e56fb0] "
                         : "bg-gray-100 text-gray-400 line-through"
                     }`}
                 >
