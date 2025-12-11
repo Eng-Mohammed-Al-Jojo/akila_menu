@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { ref, onValue } from "firebase/database";
 import "./App.css";
-import { FaMapMarkerAlt, FaPhone, FaCode, FaRegCopyright } from "react-icons/fa";
+import { FaMapMarkerAlt, FaPhone, FaCode } from "react-icons/fa";
 
 interface MenuItem {
   id: string;
