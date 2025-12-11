@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase";
 import { ref, onValue } from "firebase/database";
 import "./App.css";
-import { FaMapMarkerAlt, FaPhone, FaCode, FaRegCopyright ,FaIceCream } from "react-icons/fa";
+import { FaMapMarkerAlt, FaPhone, FaCode, FaRegCopyright } from "react-icons/fa";
 
 interface MenuItem {
   id: string;
@@ -58,7 +58,7 @@ export default function App() {
       className="min-h-screen flex flex-col font-sans"
       dir="rtl"
       style={{
-        background: "linear-gradient(to bottom, #f9f7ff, #edf5f0)",
+        background: "linear-gradient(to bottom, #f9f7ff, #f0fff6)",
       }}
     >
       {/* اللوجو في أعلى الصفحة */}
@@ -117,26 +117,20 @@ export default function App() {
   <div className="container mx-auto flex justify-between items-center px-5">
 
     {/* القسم الأيمن */}
-    <div className="text-right space-y-1">
-      <div className="flex items-center gap-2 justify-end">
-        <FaMapMarkerAlt /> شارع الثورة بجوار تاج مول
-      </div>
-      <div className="flex items-center gap-2 justify-end">
-        <FaPhone /> <span dir="ltr">0592270295 | 0592158813</span>
-      </div>
+  <div className="text-right flex flex-col items-end gap-1">
+    <div className="flex items-center gap-1">
+      <FaMapMarkerAlt /> شارع الثورة بجوار تاج مول
     </div>
+    <div className="flex items-center gap-1 ">
+      <FaPhone /> <span dir="rtl">0592270295</span>
+    </div>
+  </div>
 
-    {/* القسم الأوسط */}
-    <div className="text-center text-lg font-extrabold flex items-center gap-2">
-      <FaRegCopyright />
-      2025 جميع الحقوق محفوظة – بوظة وبراد عكيلة
-      <FaIceCream className="text-yellow-600 text-xl"/>
-    </div>
-
-    {/* القسم الأيسر */}
-    <div className="text-left flex items-center gap-2">
-      <FaCode /> تطوير: Eng. Mohammed Eljoujo
-    </div>
+  {/* القسم الأيسر */}
+  <div className="text-left flex items-center gap-2">
+   Eng. Mohammed Eljoujo
+    <FaCode />
+  </div>
 
   </div>
 </footer>
