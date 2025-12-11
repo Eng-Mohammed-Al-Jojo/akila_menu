@@ -8,6 +8,8 @@ interface MenuItem {
   name: string;
   price: string;
   createdAt?: number;
+  visible?: boolean; // <-- أضف هذا الحقل
+
 }
 
 interface MenuSection {
@@ -86,13 +88,15 @@ export default function App() {
               {section.items.map((item) => (
                 <div
                   key={item.id}
-                  className="p-5 rounded-2xl shadow-md bg-white flex justify-between items-center 
-                  text-gray-900 transition-all duration-200 hover:shadow-lg"
+                  className={`p-5 rounded-2xl shadow-md flex justify-between items-center 
+                    transition-all duration-200 hover:shadow-lg hover:shadow-[#e56fb0]  ${
+                      !item.visible
+                        ? "bg-white-100 text-gray-900"
+                        : "bg-gray-100 text-gray-400 line-through"
+                    }`}
                 >
                   <h3 className="text-lg font-medium">{item.name}</h3>
-                  <div className="text-lg font-semibold text-[#CCC20D]">
-                    {item.price} ₪
-                  </div>
+                  <div className="text-lg font-semibold text-[#CCC20D]">{item.price} ₪</div>
                 </div>
               ))}
             </div>

@@ -92,6 +92,8 @@ export default function Admin() {
       name: itemName,
       price: parseFloat(itemPrice),
       createdAt: Date.now(),
+      visible: true, // <-- هذا جديد
+
     });
 
     setCategoryName("");
@@ -238,6 +240,18 @@ export default function Admin() {
                         >
                           <FiTrash2 /> حذف
                         </button>
+                        <button
+  onClick={() =>
+    set(ref(db, `menu/${category}/${id}/visible`), !item.visible)
+  }
+  className={`px-3 py-1 rounded-xl transition ${
+    item.visible
+      ? "bg-green-600 text-white hover:bg-green-700"
+      : "bg-gray-400 text-white hover:bg-gray-500"
+  }`}
+>
+  {item.visible ? "نشط" : "غير نشط"}
+</button>
                       </div>
                     </div>
                   );
