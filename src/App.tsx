@@ -108,15 +108,14 @@ export default function App() {
   }}
 >
   <div className="container mx-auto flex justify-between items-center px-5">
-    {/* بيانات المطور على اليسار */}
-   
-
+    
     {/* بيانات المحل على اليمين */}
     <div className="text-left">
       © 2025 بوظة وبراد عكيلة  <br />
        للتواصل: 0592270295
     </div>
-
+    
+{/* بيانات المطور على اليسار */}
      <div className="text-right">
       تطوير: Eng. Mohammed Eljoujo <br />
       للتواصل: 0592133357
