@@ -92,7 +92,7 @@ export default function App() {
                   className={`p-5 rounded-2xl shadow-md flex justify-between items-center 
                      ${
                       !item.visible
-                        ? "bg-white-100 text-gray-900 transition-all duration-200 hover:shadow-lg hover:shadow-[#e56fb0] "
+                        ? "bg-white-100 text-gray-900 transition-all shadow-md shadow-[#b8779b] duration-200 hover:shadow-lg hover:shadow-[#e56fb0] "
                         : "bg-gray-100 text-gray-400 line-through"
                     }`}
                 >
@@ -114,26 +114,31 @@ export default function App() {
     direction: "rtl",
   }}
 >
-  <div className="container mx-auto flex justify-between items-center px-5">
-
+  <div
+    className="
+      container mx-auto 
+      flex flex-col md:flex-row 
+      justify-between items-center 
+      px-5 gap-4 text-center md:text-right
+    "
+  >
     {/* القسم الأيمن */}
-  <div className="text-right flex flex-col items-end gap-1">
-    <div className="flex items-center gap-1">
-      <FaMapMarkerAlt /> شارع الثورة بجوار تاج مول
+    <div className="flex flex-col items-center md:items-end gap-1">
+      <div className="flex items-center gap-1">
+        <FaMapMarkerAlt /> شارع الثورة بجوار تاج مول
+      </div>
+      <div className="flex items-center gap-1">
+        <FaPhone /> <span dir="rtl">0592270295</span>
+      </div>
     </div>
-    <div className="flex items-center gap-1 ">
-      <FaPhone /> <span dir="rtl">0592270295</span>
-    </div>
-  </div>
 
-  {/* القسم الأيسر */}
-  <div className="text-left flex items-center gap-2">
-   Eng. Mohammed Eljoujo
-    <FaCode />
-  </div>
-
-  </div>
+    {/* القسم الأيسر */}
+   <div className="flex items-center gap-2 justify-center md:justify-start text-xs">
+  Eng. Mohammed Eljoujo <FaCode />
+</div>
+</div>
 </footer>
+
 
 
 
