@@ -258,13 +258,13 @@ export default function Admin() {
                           onClick={() => openEditPopup(category, id, item)}
                           className="bg-yellow-400 text-white px-3 py-1 rounded-xl hover:bg-yellow-500 transition flex items-center gap-1"
                         >
-                          <FiEdit /> تعديل
+                          <FiEdit /> 
                         </button>
                         <button
                           onClick={() => openDeletePopup(category, id, item)}
                           className="bg-red-600 text-white px-3 py-1 rounded-xl hover:bg-red-700 transition flex items-center gap-1"
                         >
-                          <FiTrash2 /> حذف
+                          <FiTrash2 /> 
                         </button>
                         <button
                           onClick={() =>
