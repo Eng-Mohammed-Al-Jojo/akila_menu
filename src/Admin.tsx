@@ -51,20 +51,20 @@ export default function Admin() {
   useEffect(() => {
     if (!auth) return;
 
-    let logoutTimer: number; // استخدام number بدل NodeJS.Timeout
+    let logoutTimer: number;
 
     const resetTimer = () => {
       if (logoutTimer) clearTimeout(logoutTimer);
       logoutTimer = window.setTimeout(() => {
         confirmLogout();
-      }, 2 * 60 * 1000); // دقيقتين
+      }, 2 * 60 * 1000);
     };
 
     window.addEventListener("mousemove", resetTimer);
     window.addEventListener("keydown", resetTimer);
     window.addEventListener("click", resetTimer);
 
-    resetTimer(); // بدء المؤقت لأول مرة
+    resetTimer();
 
     return () => {
       clearTimeout(logoutTimer);
@@ -74,26 +74,36 @@ export default function Admin() {
     };
   }, [auth]);
 
-  // إضافة منتج مع Validation بدون منع الأقسام
+  // إضافة منتج مع دعم رقم واحد أو 3 أرقام مفصولة بفواصل
   const addItem = () => {
     setError("");
     if (!categoryName.trim()) return setError("يرجى إدخال اسم القسم");
     if (!itemName.trim()) return setError("يرجى إدخال اسم المنتج");
-    if (!itemPrice.trim() || isNaN(Number(itemPrice)))
-      return setError("يرجى إدخال سعر صحيح");
+    if (!itemPrice.trim()) return setError("يرجى إدخال سعر صحيح");
 
-    // إنشاء القسم إذا لم يكن موجود
+    let priceData: any = itemPrice;
+
+    if (itemPrice.includes(",")) {
+      const p = itemPrice.split(",").map(x => x.trim());
+      if (p.length === 3) {
+        priceData = p.map(x => Number(x));
+      } else {
+        return setError("إذا أدخلت فواصل يجب إدخال 3 أرقام");
+      }
+    } else {
+      if (isNaN(Number(itemPrice))) return setError("يرجى إدخال رقم صحيح");
+      priceData = Number(itemPrice);
+    }
+
     if (!menu[categoryName]) {
       set(ref(db, `menu/${categoryName}`), {});
     }
 
-    // إضافة المنتج داخل القسم
     push(ref(db, `menu/${categoryName}`), {
       name: itemName,
-      price: parseFloat(itemPrice),
+      price: priceData,
       createdAt: Date.now(),
-      visible: true, // <-- هذا جديد
-
+      visible: true
     });
 
     setCategoryName("");
@@ -107,11 +117,25 @@ export default function Admin() {
   const openDeletePopup = (category: string, id: string, item: any) =>
     setPopup({ type: "delete", category, id, item });
 
+  // حفظ تعديل المنتج بنفس طريقة إضافة الأسعار
   const saveEditItem = () => {
     if (popup.category && popup.id && popup.item) {
+      let newPrice = popup.item.price;
+
+      if (typeof newPrice === "string" && newPrice.includes(",")) {
+        const p = newPrice.split(",").map(x => x.trim());
+        if (p.length === 3) {
+          newPrice = p.map(x => Number(x));
+        } else {
+          return setError("إذا أدخلت فواصل يجب إدخال 3 أرقام");
+        }
+      } else if (!Array.isArray(newPrice)) {
+        newPrice = Number(newPrice);
+      }
+
       set(ref(db, `menu/${popup.category}/${popup.id}`), {
         ...popup.item,
-        price: parseFloat(popup.item.price),
+        price: newPrice
       });
       closePopup();
     }
@@ -190,7 +214,7 @@ export default function Admin() {
             onChange={(e) => setItemName(e.target.value)}
           />
           <input
-            placeholder="السعر"
+            placeholder="السعر_ إن كان هناك أكثر من سعر ضع بين الأرقام , "
             className="w-full p-3 border rounded-xl"
             value={itemPrice}
             onChange={(e) => setItemPrice(e.target.value)}
@@ -225,7 +249,9 @@ export default function Admin() {
                     >
                       <div>
                         <span className="font-bold">{item.name}</span> -{" "}
-                        <span>₪ {item.price}</span>
+                        <span>
+                          ₪ {Array.isArray(item.price) ? item.price.join(" / ") : item.price}
+                        </span>
                       </div>
                       <div className="flex gap-2">
                         <button
@@ -241,17 +267,17 @@ export default function Admin() {
                           <FiTrash2 /> حذف
                         </button>
                         <button
-  onClick={() =>
-    set(ref(db, `menu/${category}/${id}/visible`), !item.visible)
-  }
-  className={`px-3 py-1 rounded-xl transition ${
-    item.visible
-      ? "bg-green-600 text-white hover:bg-green-700"
-      : "bg-gray-400 text-white hover:bg-gray-500"
-  }`}
->
-  {item.visible ? "نشط" : "غير نشط"}
-</button>
+                          onClick={() =>
+                            set(ref(db, `menu/${category}/${id}/visible`), !item.visible)
+                          }
+                          className={`px-3 py-1 rounded-xl transition ${
+                            item.visible
+                              ? "bg-gray-400 text-white hover:bg-gray-500"
+                              : "bg-green-600 text-white hover:bg-green-700"
+                          }`}
+                        >
+                          {item.visible ? "غير متوفر " : " متوفر"}
+                        </button>
                       </div>
                     </div>
                   );
